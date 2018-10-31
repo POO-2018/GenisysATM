@@ -40,6 +40,9 @@ namespace GenisysATM.Models
             {
                 conn = new SqlConnection(@"server = " + servidor +
                     "integrated security = true; database = " + baseDatos);
+
+                // Establecer conexión
+                conn.Open();
             }
             catch (Exception)
             {
@@ -51,9 +54,17 @@ namespace GenisysATM.Models
         /// Ejecuta un comando SQL.
         /// </summary>
         /// <param name="elComando">El query SQL a ejecutar</param>
-        public void EjecutarComando(string elComando)
+        public SqlCommand EjecutarComando(string elComando)
         {
-            cmd = new SqlCommand(elComando, conn);
+            return cmd = new SqlCommand(elComando, conn);
+        }
+
+        /// <summary>
+        /// Cierra la conexión al servidor SQL.
+        /// </summary>
+        public void CerrarConexion()
+        {
+            conn.Close();
         }
     }
 }

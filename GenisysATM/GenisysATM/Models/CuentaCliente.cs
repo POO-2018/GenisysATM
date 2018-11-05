@@ -22,6 +22,11 @@ namespace GenisysATM.Models
         public CuentaCliente() { }
 
         // Métodos
+        /// <summary>
+        /// Obtiene la información de una cuenta para un cliente.
+        /// </summary>
+        /// <param name="cuenta">El número de cuenta del cliente</param>
+        /// <returns>CuentaCliente el objeto que contiene la información de la cuenta del cliente</returns>
         public static CuentaCliente ObtenerCliente(string cuenta)
         {
             Conexion conn = new Conexion(@"(local)\sqlexpress", "GenisysATM_V2");
@@ -60,6 +65,49 @@ namespace GenisysATM.Models
             {
                 conn.CerrarConexion();
             }
+        }
+
+        public static bool ActualizarSaldo(string cuenta, decimal debito)
+        {
+            Conexion conn = new Conexion(@"(local)\sqlexpress", "GenisysATM_V2");
+            CuentaCliente laCuenta = CuentaCliente.ObtenerCliente(cuenta);
+
+            SqlCommand cmd = conn.EjecutarComando("sp_ActualizarSaldoCuenta");
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // Parámetros
+            cmd.Parameters.Add(new SqlParameter("cuenta", SqlDbType.Char, 14));
+            cmd.Parameters.Add(new SqlParameter("debito", SqlDbType.Decimal));
+            cmd.Parameters["cuenta"].Value = laCuenta.numero;
+            cmd.Parameters["debito"].Value = debito;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                return false;
+            }
+            finally
+            {
+                conn.CerrarConexion();
+            }
+        }
+
+        public static bool ActualizarPin(CuentaCliente laCuenta, string pinNuevo)
+        {
+            Conexion conn = new Conexion(@"(local)\sqlexpress", "GenisysATM_V2");
+
+            SqlCommand cmd = conn.EjecutarComando("sp_ActualizarPin");
+            cmd.Parameters.Add(new SqlParameter("cuenta", SqlDbType.Char, 14));
+            cmd.Parameters.Add(new SqlParameter("pinActual", SqlDbType.Char, 4));
+            cmd.Parameters.Add(new SqlParameter("pinNuevo", SqlDbType.Char, 4));
+
+
         }
     }
 }

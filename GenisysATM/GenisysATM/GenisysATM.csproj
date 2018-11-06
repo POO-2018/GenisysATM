@@ -54,6 +54,9 @@
     <Compile Include="Models\Configuracion.cs" />
     <Compile Include="Models\CuentaCliente.cs" />
     <Compile Include="Models\CustomException.cs" />
+    <Compile Include="Models\ServicioCliente.cs" />
+    <Compile Include="Models\ServicioPublico.cs" />
+    <Compile Include="Models\TarjetaCredito.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

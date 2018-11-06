@@ -67,6 +67,13 @@ namespace GenisysATM.Models
             }
         }
 
+        /// <summary>
+        /// Actualiza el saldo en la cuenta de un cliente. Dicha actualización
+        /// solamente toma en cuenta débitos.
+        /// </summary>
+        /// <param name="cuenta">el número de cuenta del cliente</param>
+        /// <param name="debito">el valor a ser debitado del saldo de la cuenta</param>
+        /// <returns>true si el débidto pudo ser realizado. false en caso contrario.</returns>
         public static bool ActualizarSaldo(string cuenta, decimal debito)
         {
             Conexion conn = new Conexion(@"(local)\sqlexpress", "GenisysATM_V2");
@@ -98,6 +105,12 @@ namespace GenisysATM.Models
             }
         }
 
+        /// <summary>
+        /// Actualiza el valor del PIN para la cuenta de un cliente.
+        /// </summary>
+        /// <param name="laCuenta">número de cuenta del cliente</param>
+        /// <param name="pinNuevo">el nuevo valor para el PIN</param>
+        /// <returns>true si se actualiza el PIN. false en caso contrario.</returns>
         public static bool ActualizarPin(CuentaCliente laCuenta, string pinNuevo)
         {
             Conexion conn = new Conexion(@"(local)\sqlexpress", "GenisysATM_V2");
@@ -107,7 +120,24 @@ namespace GenisysATM.Models
             cmd.Parameters.Add(new SqlParameter("pinActual", SqlDbType.Char, 4));
             cmd.Parameters.Add(new SqlParameter("pinNuevo", SqlDbType.Char, 4));
 
+            cmd.Parameters["cuenta"].Value = laCuenta.numero;
+            cmd.Parameters["pinActual"].Value = laCuenta.pin;
+            cmd.Parameters["pinNuevo"].Value = pinNuevo;
 
+            try
+            {
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                return false;
+            }
+            finally
+            {
+                conn.CerrarConexion();
+            }
         }
     }
 }

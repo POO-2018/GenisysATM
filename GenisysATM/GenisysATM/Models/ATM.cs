@@ -28,5 +28,25 @@ namespace GenisysATM.Models
         protected CuentaCliente laCuenta = new CuentaCliente();
         protected ServicioCliente losServicios = new ServicioCliente();
         protected TarjetaCredito laTarjeta = new TarjetaCredito();
+
+        // Constructores
+        public ATM() { }
+
+        public ATM(string laTarjeta="", string elPin="")
+        {
+            numeroTarjeta = laTarjeta;
+            pin = elPin;
+        }
+
+        // Métodos
+        public bool VerificarInicio(string laCuenta, string elPin)
+        {
+            this.laCuenta = CuentaCliente.ObtenerCliente(laCuenta);
+
+            if (this.laCuenta.numero == laCuenta && this.laCuenta.pin == elPin)
+                return true;
+            else
+                return false;
+        }
     }
 }

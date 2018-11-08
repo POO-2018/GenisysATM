@@ -38,8 +38,8 @@ namespace GenisysATM.Models
         {
             try
             {
-                conn = new SqlConnection(@"server = " + servidor +
-                    "integrated security = true; database = " + baseDatos);
+                conn = new SqlConnection(@"server = (local)\sqlexpress;" +
+                    "integrated security = true; database = GenisysATM_V2");
 
                 // Establecer conexión
                 conn.Open();

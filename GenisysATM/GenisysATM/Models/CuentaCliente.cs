@@ -50,9 +50,12 @@ namespace GenisysATM.Models
                 while (rdr.Read())
                 {
                     laCuenta.numero = rdr.GetString(0);
-                    laCuenta.idCliente = rdr.GetInt16(1);
+                    laCuenta.idCliente = Convert.ToInt16(rdr["idCliente"]);
                     laCuenta.saldo = rdr.GetDecimal(2);
                     laCuenta.pin = rdr.GetString(3);
+
+                    // Remover los espacios en blanco al final del los campos CHAR (hotfix101)
+                    laCuenta.numero = laCuenta.numero.TrimEnd();
                 }
 
                 return laCuenta;

@@ -1,0 +1,107 @@
+USE tempdb
+GO
+
+CREATE DATABASE GenisysATM_V2
+GO
+
+USE GenisysATM_V2
+GO
+
+CREATE SCHEMA  ATM
+GO
+
+-- Tablas
+CREATE TABLE ATM.Cliente (
+	id INT NOT NULL IDENTITY(100, 1)
+		CONSTRAINT PK_ATM_Clientes_id PRIMARY KEY CLUSTERED,
+	nombres NVARCHAR(100) NOT NULL,
+	apellidos NVARCHAR(100) NOT NULL,
+	identidad CHAR(13) NOT NULL,
+	direccion NVARCHAR(2000) NOT NULL,
+	telefono CHAR(9),
+	celular CHAR(9) NOT NULL
+);
+GO
+
+CREATE TABLE ATM.ServicioPublico (
+	id INT NOT NULL IDENTITY(1000, 1)
+		CONSTRAINT PK_ATM_ServicioPublico_id PRIMARY KEY CLUSTERED,
+	descripcion NVARCHAR(100) NOT NULL
+		CONSTRAINT UNQ_ATM_ServicioPublico_descripcion UNIQUE
+);
+GO
+
+CREATE TABLE ATM.TarjetaCredito (
+	id INT NOT NULL IDENTITY(10000, 1)
+		CONSTRAINT PK_ATM_TarjetaCredito_id PRIMARY KEY CLUSTERED,
+	descripcion NVARCHAR(100) NOT NULL
+		CONSTRAINT UNQ_ATM_TarjetaCredito_descripcion UNIQUE,
+	monto DECIMAL(12,2) NOT NULL
+		CONSTRAINT CHK_TarjetaCredito$MontoMayorCero
+			CHECK(Monto < 0),
+	limite DECIMAL(12,2) NOT NULL
+);
+GO
+
+CREATE TABLE ATM.Configuracion (
+	id TINYINT NOT NULL IDENTITY(1, 1)
+		CONSTRAINT PK_ATM_Configuracion_id PRIMARY KEY CLUSTERED,
+	appKey NCHAR(50) NOT NULL
+		CONSTRAINT UNQ_ATM_Configuracion_appKey UNIQUE,
+	valor NCHAR(50) NOT NULL,
+	descripcion NVARCHAR(2000) NOT NULL
+);
+GO
+
+-- Transaccionales
+
+CREATE TABLE ATM.CuentaCliente (
+	numero CHAR(14) NOT NULL
+		CONSTRAINT PK_ATM_TarjetaCliente_numero PRIMARY KEY NONCLUSTERED,
+	idCliente INT NOT NULL,
+	saldo DECIMAL(12,2) NOT NULL,
+	pin CHAR(4) NOT NULL
+);
+GO
+
+ALTER TABLE ATM.CuentaCliente
+	ADD CONSTRAINT FK_AMT_CuentaCliente$TieneUn$ATM_Cliente
+		FOREIGN KEY (idCliente) REFERENCES ATM.Cliente(id)
+		ON UPDATE NO ACTION
+		ON DELETE NO ACTION
+
+CREATE TABLE ATM.ServicioCliente (
+	id INT NOT NULL IDENTITY(2000, 1)
+		CONSTRAINT PK_ServicioCliente_id PRIMARY KEY CLUSTERED,
+	idCliente INT NOT NULL,
+	idServicio INT NOT NULL,
+	saldo DECIMAL(12,2) NOT NULL
+	CONSTRAINT UNQ_ATM_ServicioCliente_idCliente_idServicio
+		UNIQUE (idCliente, idServicio)
+);
+GO
+
+ALTER TABLE ATM.ServicioCliente
+	ADD CONSTRAINT FK_ATM_ServicioCliente$TieneUn$ATM_Cliente
+		FOREIGN KEY (idCliente) REFERENCES ATM.Cliente(id)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+GO
+
+ALTER TABLE ATM.ServicioCliente
+	ADD CONSTRAINT FK_ATM_ServicioCliente$TieneUn$ATM_ServicioPublico
+		FOREIGN KEY (idServicio) REFERENCES ATM.ServicioPublico(id)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+GO
+
+ALTER TABLE ATM.TarjetaCredito
+ADD idCliente INT NOT NULL
+GO
+
+ALTER TABLE ATM.TarjetaCredito
+ADD CONSTRAINT FK_ATM_TarjetaCredito$EsDeUn$ATM_Cliente
+	FOREIGN KEY (idCliente) REFERENCES ATM.Cliente(id)
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION
+GO

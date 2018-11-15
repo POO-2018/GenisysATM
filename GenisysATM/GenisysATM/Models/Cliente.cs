@@ -66,7 +66,7 @@ namespace GenisysATM.Models
                     resultado.apellidos = rdr.GetString(2);
                     resultado.identidad = rdr.GetString(3);
                     resultado.direccion = rdr.GetString(4);
-                    resultado.telefono = rdr["telefono"] as string;
+                    resultado.telefono = rdr.SafeGetString("telefono");
                     resultado.celular = rdr.GetString(6);
 
                     // Remover espacios
@@ -120,7 +120,7 @@ namespace GenisysATM.Models
                     resultado.apellidos = rdr.GetString(2);
                     resultado.identidad = rdr.GetString(3);
                     resultado.direccion = rdr.GetString(4);
-                    resultado.telefono = rdr["telefono"] as string;
+                    resultado.telefono = rdr.SafeGetString("telefono");
                     resultado.celular = rdr.GetString(6);
 
                     // Remover espacios

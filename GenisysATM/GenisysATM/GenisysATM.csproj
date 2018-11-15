@@ -70,6 +70,7 @@
     <Compile Include="Models\FormProvider.cs" />
     <Compile Include="Models\ServicioCliente.cs" />
     <Compile Include="Models\ServicioPublico.cs" />
+    <Compile Include="Models\SqlDataReaderExtensions.cs" />
     <Compile Include="Models\TarjetaCredito.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

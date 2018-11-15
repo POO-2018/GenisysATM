@@ -67,6 +67,7 @@
     <Compile Include="Models\Configuracion.cs" />
     <Compile Include="Models\CuentaCliente.cs" />
     <Compile Include="Models\CustomException.cs" />
+    <Compile Include="Models\FormProvider.cs" />
     <Compile Include="Models\ServicioCliente.cs" />
     <Compile Include="Models\ServicioPublico.cs" />
     <Compile Include="Models\TarjetaCredito.cs" />

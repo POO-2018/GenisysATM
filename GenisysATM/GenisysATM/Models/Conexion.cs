@@ -13,8 +13,8 @@ namespace GenisysATM.Models
     class Conexion
     {
         // Propiedades
-        private string servidor;
-        private string baseDatos;
+        private string servidor = @"(local)\sqlexpress";
+        private string baseDatos = "GenisysATM_V2";
         public SqlConnection conn;
         public SqlCommand cmd;
 

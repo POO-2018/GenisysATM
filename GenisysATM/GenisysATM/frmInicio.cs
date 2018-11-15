@@ -12,6 +12,9 @@ using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
 
+// Obteniendo los Modelos
+using GenisysATM.Models;
+
 namespace GenisysATM
 {
     public partial class frmInicio : MaterialForm
@@ -34,12 +37,20 @@ namespace GenisysATM
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            Models.ATM atm = new Models.ATM();
+            ATM atm = new ATM();
 
             if (atm.VerificarInicio(txtCuenta.Text, txtPIN.Text))
             {
                 MessageBox.Show("Bienvenido al sistema de ATM Genisys", "Información");
-
+                // Inicializar una instancia del menú principal
+                frmMenuPrincipal menuPrincipal = new frmMenuPrincipal(txtCuenta.Text, this);
+                // Limpiar los valores de los campos de texto
+                txtCuenta.Text = string.Empty;
+                txtPIN.Text = string.Empty;
+                // Ocultar el formulario de inicio
+                this.Hide();
+                // Mostrar el menú principal
+                menuPrincipal.Show();
             }
             else
                 MessageBox.Show("Número de cuenta o PIN erróneos", "Información");

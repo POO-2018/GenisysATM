@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// Obteniendo los Modelos
+using GenisysATM.Models;
+
 namespace GenisysATM
 {
     static class Program
@@ -16,7 +19,7 @@ namespace GenisysATM
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmInicio());
+            Application.Run(FormProvider.formularioInicio);
         }
     }
 }

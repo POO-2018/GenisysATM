@@ -42,8 +42,10 @@ namespace GenisysATM
             if (atm.VerificarInicio(txtCuenta.Text, txtPIN.Text))
             {
                 MessageBox.Show("Bienvenido al sistema de ATM Genisys", "Información");
+                // Configurar el valor de la cuenta del cliente
+                FormProvider.cuentaCliente = CuentaCliente.ObtenerCliente(txtCuenta.Text);
                 // Inicializar una instancia del menú principal
-                frmMenuPrincipal menuPrincipal = new frmMenuPrincipal(txtCuenta.Text, this);
+                frmMenuPrincipal menuPrincipal = FormProvider.formularioMenuPrincipal;
                 // Limpiar los valores de los campos de texto
                 txtCuenta.Text = string.Empty;
                 txtPIN.Text = string.Empty;

@@ -61,6 +61,12 @@
     <Compile Include="frmMenuPrincipal.Designer.cs">
       <DependentUpon>frmMenuPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRetiroLempiras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRetiroLempiras.designer.cs">
+      <DependentUpon>frmRetiroLempiras.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ATM.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Conexion.cs" />
@@ -79,6 +85,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMenuPrincipal.resx">
       <DependentUpon>frmMenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRetiroLempiras.resx">
+      <DependentUpon>frmRetiroLempiras.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

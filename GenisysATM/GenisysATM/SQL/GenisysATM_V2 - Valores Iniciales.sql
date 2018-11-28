@@ -2,11 +2,11 @@
 USE GenisysATM_V2
 GO;
 
-INSERT INTO ATM.Configuracion (appKey, valor)
-VALUES ('MONTOMAXIMODOLARES', '200'),
-       ('MONTOMAXIMOLEMPIRAS', '4000'),
-	   ('TASACAMBIODOLARES', '24.25'),
-	   ('INTENTOSPIN', '4');
+INSERT INTO ATM.Configuracion (appKey, valor, descripcion)
+VALUES ('MONTOMAXIMODOLARES', '200', 'Límite máximo para retiros en dólares'),
+       ('MONTOMAXIMOLEMPIRAS', '4000', 'Límite máximo para retiros en lempiras'),
+	   ('TASACAMBIODOLARES', '24.25', 'Tasa de cambio lempira/dolar para las transacciones'),
+	   ('INTENTOSPIN', '4', 'Números de intentos máximos para ingresar un PIN erróneo');
 GO
 
 INSERT INTO ATM.Cliente (nombres, apellidos, identidad, direccion, celular)

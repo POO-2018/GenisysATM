@@ -24,7 +24,7 @@ namespace GenisysATM.Models
         // Métodos
         public static string ObtenerConfiguracion(string key)
         {
-            string valor = "";
+            string valor = String.Empty;
             SqlDataReader rdr;
             Conexion conn = new Conexion(@"(local)\sqlexpress", "GenisysATM_V2");
             SqlCommand cmd = conn.EjecutarComando(@"SELECT valor 

@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.gbOpciones = new System.Windows.Forms.GroupBox();
-            this.lblCliente = new System.Windows.Forms.Label();
             this.btnCambioPin = new MaterialSkin.Controls.MaterialRaisedButton();
             this.btntarjetaCredito = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.btnRetiroLempiras = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.btnSalir = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.btnServiciosPublicos = new MaterialSkin.Controls.MaterialRaisedButton();
             this.btnRetiroDolares = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.btnRetiroLempiras = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.btnServiciosPublicos = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.btnSalir = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.lblCliente = new System.Windows.Forms.Label();
             this.gbOpciones.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,17 +55,6 @@
             this.gbOpciones.TabIndex = 0;
             this.gbOpciones.TabStop = false;
             this.gbOpciones.Text = "SELECCIONE LA OPCIÓN A REALIZAR";
-            // 
-            // lblCliente
-            // 
-            this.lblCliente.BackColor = System.Drawing.Color.Transparent;
-            this.lblCliente.Font = new System.Drawing.Font("Roboto", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCliente.Location = new System.Drawing.Point(569, 110);
-            this.lblCliente.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lblCliente.Name = "lblCliente";
-            this.lblCliente.Size = new System.Drawing.Size(859, 73);
-            this.lblCliente.TabIndex = 3;
-            this.lblCliente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnCambioPin
             // 
@@ -93,6 +82,19 @@
             this.btntarjetaCredito.Text = "Pago tarjeta de Crédito";
             this.btntarjetaCredito.UseVisualStyleBackColor = true;
             // 
+            // btnRetiroDolares
+            // 
+            this.btnRetiroDolares.Depth = 0;
+            this.btnRetiroDolares.Location = new System.Drawing.Point(33, 280);
+            this.btnRetiroDolares.Margin = new System.Windows.Forms.Padding(6);
+            this.btnRetiroDolares.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnRetiroDolares.Name = "btnRetiroDolares";
+            this.btnRetiroDolares.Primary = true;
+            this.btnRetiroDolares.Size = new System.Drawing.Size(418, 137);
+            this.btnRetiroDolares.TabIndex = 13;
+            this.btnRetiroDolares.Text = "Retiro en Dolares";
+            this.btnRetiroDolares.UseVisualStyleBackColor = true;
+            // 
             // btnRetiroLempiras
             // 
             this.btnRetiroLempiras.Depth = 0;
@@ -105,6 +107,20 @@
             this.btnRetiroLempiras.TabIndex = 10;
             this.btnRetiroLempiras.Text = "Retiro en lempiras";
             this.btnRetiroLempiras.UseVisualStyleBackColor = true;
+            this.btnRetiroLempiras.Click += new System.EventHandler(this.btnRetiroLempiras_Click);
+            // 
+            // btnServiciosPublicos
+            // 
+            this.btnServiciosPublicos.Depth = 0;
+            this.btnServiciosPublicos.Location = new System.Drawing.Point(33, 465);
+            this.btnServiciosPublicos.Margin = new System.Windows.Forms.Padding(6);
+            this.btnServiciosPublicos.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnServiciosPublicos.Name = "btnServiciosPublicos";
+            this.btnServiciosPublicos.Primary = true;
+            this.btnServiciosPublicos.Size = new System.Drawing.Size(418, 137);
+            this.btnServiciosPublicos.TabIndex = 14;
+            this.btnServiciosPublicos.Text = "Pago servicios públicos";
+            this.btnServiciosPublicos.UseVisualStyleBackColor = true;
             // 
             // btnSalir
             // 
@@ -120,31 +136,16 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // btnServiciosPublicos
+            // lblCliente
             // 
-            this.btnServiciosPublicos.Depth = 0;
-            this.btnServiciosPublicos.Location = new System.Drawing.Point(33, 465);
-            this.btnServiciosPublicos.Margin = new System.Windows.Forms.Padding(6);
-            this.btnServiciosPublicos.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnServiciosPublicos.Name = "btnServiciosPublicos";
-            this.btnServiciosPublicos.Primary = true;
-            this.btnServiciosPublicos.Size = new System.Drawing.Size(418, 137);
-            this.btnServiciosPublicos.TabIndex = 14;
-            this.btnServiciosPublicos.Text = "Pago servicios públicos";
-            this.btnServiciosPublicos.UseVisualStyleBackColor = true;
-            // 
-            // btnRetiroDolares
-            // 
-            this.btnRetiroDolares.Depth = 0;
-            this.btnRetiroDolares.Location = new System.Drawing.Point(33, 280);
-            this.btnRetiroDolares.Margin = new System.Windows.Forms.Padding(6);
-            this.btnRetiroDolares.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnRetiroDolares.Name = "btnRetiroDolares";
-            this.btnRetiroDolares.Primary = true;
-            this.btnRetiroDolares.Size = new System.Drawing.Size(418, 137);
-            this.btnRetiroDolares.TabIndex = 13;
-            this.btnRetiroDolares.Text = "Retiro en Dolares";
-            this.btnRetiroDolares.UseVisualStyleBackColor = true;
+            this.lblCliente.BackColor = System.Drawing.Color.Transparent;
+            this.lblCliente.Font = new System.Drawing.Font("Roboto", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCliente.Location = new System.Drawing.Point(569, 110);
+            this.lblCliente.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblCliente.Name = "lblCliente";
+            this.lblCliente.Size = new System.Drawing.Size(859, 73);
+            this.lblCliente.TabIndex = 3;
+            this.lblCliente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmMenuPrincipal
             // 

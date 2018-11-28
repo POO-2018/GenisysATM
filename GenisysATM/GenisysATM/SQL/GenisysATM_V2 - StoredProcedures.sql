@@ -9,9 +9,9 @@ AS
 BEGIN
 	UPDATE ATM.CuentaCliente
 	SET saldo = saldo - @debito
-	WHERE numero = @cuenta
+	WHERE numero = @cuenta;
 END
-GO;
+GO
 
 CREATE PROCEDURE sp_ActualizarPin (
 	@cuenta CHAR(14),

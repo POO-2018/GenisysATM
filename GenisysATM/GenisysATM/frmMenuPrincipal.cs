@@ -21,7 +21,7 @@ namespace GenisysATM
     {
         private readonly MaterialSkinManager materialSkinManager;
 
-        public frmMenuPrincipal(string laCuenta, frmInicio frmInicio)
+        public frmMenuPrincipal(string laCuenta)
         {
             InitializeComponent();
 
@@ -35,9 +35,9 @@ namespace GenisysATM
             );
 
             // Obtener la cuenta desde la base de datos
-            CuentaCliente cuentaCliente = CuentaCliente.ObtenerCliente(laCuenta);
+            FormProvider.cuentaCliente = CuentaCliente.ObtenerCliente(laCuenta);
             //Obtener el cliente
-            Cliente elCliente = Cliente.ObtenerClienteById(cuentaCliente.idCliente);
+            Cliente elCliente = Cliente.ObtenerClienteById(FormProvider.cuentaCliente.idCliente);
 
             // Desplegar el nombre del cliente en el formulario
             lblCliente.Text = elCliente.ToString();
@@ -52,6 +52,16 @@ namespace GenisysATM
             // Aplicar Singleton para poder tener acceso al formulario de inicio oculto previamente
             // https://stackoverflow.com/questions/3005732/showing-a-hidden-form
             FormProvider.formularioInicio.Show();
+        }
+
+        private void btnRetiroLempiras_Click(object sender, EventArgs e)
+        {
+            // Obtener una instancia del formulario de retiro en lempiras
+            frmRetiroLempiras formularioRetiroLempiras = FormProvider.formularioRetiroLempiras;
+            // Ocultar el menú principal
+            this.Hide();
+            // Mostrar el formulario de retiro en lempiras
+            formularioRetiroLempiras.Show();
         }
     }
 }
